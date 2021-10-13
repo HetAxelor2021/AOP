@@ -4,10 +4,18 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 	 
-	<grid model="com.axelor.student.db.School" title="Schools" name="school-grid" editable="true">
-		<field name="schoolType" />
+	 <!-- 
+	 <grid model="com.axelor.student.db.School" title="Schools" name="school-grid" canArchive="false" canDelete="false" canEdit="false" edit-icon="false" canNew="false"  >
+	  -->
+	<grid model="com.axelor.student.db.School" title="Schools" name="school-grid"  orderBy="-schoolType" groupBy="schoolType" customSearch="true" freeSearch="schoolType">
+		<!-- to check css classess do visit open-platform-demo repo for references -->
+		
+		<hilite if="address==null" color="danger" strong="true"  />
+		
+		<field name="schoolType" hidden="true"  />
 		<field name="schoolName" />
 		<field name="address" />
+		
 	<!-- 
 	 	<field name="studentList" >
 			<grid title="Students" >
@@ -31,11 +39,39 @@
 	
 	 -->
 		
+		
 	</grid>
+	<grid model="com.axelor.student.db.School" title="Schools" name="school-test-grid" editable="true">
+		
+		<toolbar>
+			<button onClick="clickMe" name="clickMeBtn" title="Click Me!" prompt="Are you sure? (from toolBar)" icon="fa-print"/>
+		</toolbar>
+		<menubar>
+			<menu title="Buttons">
+				<item action="action" title="Test" /> 
+			</menu>
+			<menu title="Button1">
+				<item action="action1" title="Test 1" />
+			</menu>
+		</menubar>
+		<field name="schoolType" title="Test school" bgColor="danger" />
+		<field name="schoolName" />
+		<field name="address" domain="self.completeAddress = 'SURAT'"  massUpdate="true"/>
+		<button onClick="clickMe" name="clickMeBtn" title="Click Me!" prompt="Are you sure?" icon="fa-print"/>
+		
+		<!-- 
+		<field name="address" canEdit="true" canNew="true" canRemove="true" canView="false" canSuggest="false"  />
+		
+		 -->
+		
+				
+	</grid>
+	
 	<form model="com.axelor.student.db.School" title="School" name="school-form" >
 		<panel>
+			<field name="schoolType" />
 			<field name="schoolName" />
-			<field name="address" />
+			<field name="address" canEdit="true" />
 			<panel-related field="studentList" />
 			
 			<panel-related field="peopleSet" />
