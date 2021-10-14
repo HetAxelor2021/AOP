@@ -22,6 +22,8 @@
   	<!-- 
   	
   	
+  	
+  	
   	 -->
   	
   	<string name="fullName" title="FullName" search="name,email" >
@@ -62,11 +64,11 @@
 	  	 	]]>
 	  	 
 	  	 </extra-code>
-  	  -->
   	 <finder-method name="findByNameAndEmail" using="name,email" />
   	  <finder-method name="findAllByNameAndEmail" using="name,email" all="true"/>
   	 <finder-method name="findByNameOrEmail" using="String:name, String:email" filter="self.name = :name OR self.email = :email" />
   	 
+  	  -->
   </entity>
   
 

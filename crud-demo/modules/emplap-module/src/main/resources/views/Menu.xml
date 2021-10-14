@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+	
+	<menuitem name="emplap-root" title="Employees Details" />
+	<menuitem name="emplap-root-employee" title="Employees" parent="emplap-root" action="action.emplap.root.employees" />
+	<action-view name="action.emplap.root.employees"  title="Employees" model="com.hh.emplap.db.Employee">
+		<view type="grid" name="employee-grid" />
+		<view type="form" name="employee-form" />
+	</action-view>
+	
+	<menuitem name="emplap-root-laptop" title="Laptops" parent="emplap-root" action="action.emplap.root.laptops" />
+	<action-view name="action.emplap.root.laptops" title="Laptops" model="com.hh.emplap.db.Laptop" >
+		<view type="grid" name="laptop-grid" />
+		<view type="form" name="laptop-form" />
+	</action-view>
+</object-views>
