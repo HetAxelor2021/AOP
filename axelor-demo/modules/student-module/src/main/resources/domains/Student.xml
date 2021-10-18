@@ -11,10 +11,10 @@
   </enum>
   
   
-  <entity name="Student" lang="java" >
+  <entity name="Student" lang="java"  jsonAttrs="true">
   	<enum name="status" ref="STATUS" />
   	
-  	<string name="code" title="Code "/>
+  	<string name="code" title="Code " />
   	<string name="name" title="Name" />
   	<string name="email" title="Email" /> <!-- need to check its default finder method generation -->
   	
@@ -26,7 +26,7 @@
   	
   	 -->
   	
-  	<string name="fullName" title="FullName" search="name,email" >
+  	<string name="fullName" title="FullName" search="name,email" json="true" >
   		<![CDATA[
   			return name + ":" +email; 
   		]]>

@@ -7,25 +7,28 @@
 		<field name="id" />
 		<field name="name" />
 		<field name="email" />
-		<field name="laptopSet" >
-			<grid title="Laptops">
-				<field name="id" />
-				<field name="lname" />
-				
-			</grid>
-		</field>
+		<field name="nameWithEmail" />
+		<field name="status" />
+		<field name="dateOfJoining" />
+		<field name="timeOfJoining" />
+		<field name="address" />
+		<field name="company" />
+		
 	</grid>
 	<form model="com.hh.emplap.db.Employee" name="employee-form" title="Employee" >
 		<panel>
 			
 			<field name="name" />
 			<field name="email" />
-			<panel-related field="laptopSet" />
-				
+			<field name="status" />
+			<field name="nameWithEmail" readonly="true" />
+			<field name="dateOfJoining" />
+			<field name="timeOfJoining" />
+			<field name="address" canEdit="true" canNew="true"/>
+			<field name="company" />
 			
-		
-		</panel>
-		
+			
+		</panel>	
 	</form>
 </object-views>
 <!-- 

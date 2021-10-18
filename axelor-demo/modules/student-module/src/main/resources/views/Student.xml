@@ -13,11 +13,10 @@
   	<field name="parentName" />
   	<field name="tetFieldForColumn" />
   </grid>
-  
-  <form model="com.axelor.student.db.Student" title="Student" name="student-form">
+   <form model="com.axelor.student.db.Student" title="Student" name="student-form">
   	<panel>
   		<field name="status" />
-  		<field name="fullName" readonly="true" />
+  		<field name="fullName" hidden="true"/>
   		<field name="name" />
   		<field name="email" />
   		<field name="rollNumber" />
@@ -30,5 +29,20 @@
   		<field name="school" />
   	</panel>
   </form>
+  
+  <!-- 
+  <form model="com.axelor.student.db.Student" title="Student" name="student-form" readonlyIf="id" onNew="action-student-record-onnew"
+  onLoad="action-student-validate-student"
+  
+  >
+	  <action-validate name="action-student-validate-student">
+	  	<notify message="This student has failed in class" />
+	  </action-validate>
+	  
+	  <action-record name="action-student-record-onnew" model="com.axelor.student.db.Student">
+	  	<field name="parentName" expr="Axelor" />
+	  </action-record>
+  
+   -->
   
 </object-views>

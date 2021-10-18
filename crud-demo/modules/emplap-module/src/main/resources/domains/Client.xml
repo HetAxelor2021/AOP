@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domail-models
+	http://axelor.com/xml/ns/domail-models/domain-models_5.4.xsd">
+	
+	<module name="emplap" package="com.hh.emplap.db" />
+	<entity name="Client" >
+		<string name="name" title="Name" />
+		<many-to-many name="companySet" title="Company List" ref="com.hh.emplap.db.Company" mappedBy="clientSet"/>
+		
+		
+		
+  	</entity>
+	
+	</domain-models>

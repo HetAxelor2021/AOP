@@ -3,11 +3,29 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
   http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
-	<module name="emplap" package="com.hh.emplap.db" />
-	<entity name="Employee" >
-		<string name="name" title="Name"  />
-		<string name="email" title="Email" />
-		<many-to-many ref="com.hh.emplap.db.Laptop" name="laptopSet" title="Laptops"   />
+	<module name="emplap" package="com.hh.emplap.db"  table-prefix="axelor"/>
+	<enum name="WorkingStatus" >
+		<item name="AVAILABLE" value="true"/>
+		<item name="NOT_AVAILABLE" value="false"/>
+	</enum>
+	<entity name="Employee"   >
+		<string name="name" title="Name"  required="true" help="firstname" column="first_name" />
+		<string name="email" title="Email" required="true" default="example@example.com" unique="true" />
+		<integer name="age" transient="true" />
+		<string name="nameWithEmail" title="Name with Email" search="name,email" readonly="true" >
+		<![CDATA[
+			return name + " : " + email;
+		]]>
+		</string>
+		
+		<enum name="status" ref="WorkingStatus" />
+		<date name="dateOfJoining" title="Date of Joining"  />
+		<time name="timeOfJoining" title="Time of Joining" />
+		<one-to-one ref="com.hh.emplap.db.Address" name="address" />
+		<many-to-one ref="com.hh.emplap.db.Company" name="company"  title="Company Name" massUpdate="true"/>
+		
+		<finder-method name="findByEmail" using = "email" />
+		
 		<!-- 
 		
 		 -->

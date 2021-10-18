@@ -5,15 +5,28 @@
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 	
 	<menuitem name="emplap-root" title="Employees Details" />
-	<menuitem name="emplap-root-employee" title="Employees" parent="emplap-root" action="action.emplap.root.employees" />
+	<menuitem name="emplap-root-employee" title="Employee" parent="emplap-root" action="action.emplap.root.employees" />
 	<action-view name="action.emplap.root.employees"  title="Employees" model="com.hh.emplap.db.Employee">
 		<view type="grid" name="employee-grid" />
 		<view type="form" name="employee-form" />
 	</action-view>
 	
-	<menuitem name="emplap-root-laptop" title="Laptops" parent="emplap-root" action="action.emplap.root.laptops" />
-	<action-view name="action.emplap.root.laptops" title="Laptops" model="com.hh.emplap.db.Laptop" >
-		<view type="grid" name="laptop-grid" />
-		<view type="form" name="laptop-form" />
+	<menuitem name="emplap-root-company" title="Company" parent="emplap-root" action="action.emplap.root.companies" />
+	<action-view name="action.emplap.root.companies" title="Companies" model="com.hh.emplap.db.Company" >
+		<view type="grid" name="company-grid" />
+		<view type="form" name="company-form" />
+		
+	</action-view>
+	
+	<menuitem name="emplap-root-address" title="Address" parent="emplap-root" action="action.emplap.root.addressess" />
+	<action-view name="action.emplap.root.addressess" title="Addressess" model="com.hh.emplap.db.Address" >
+		<view type="grid" name="address-grid" />
+		<view type="form" name="address-form" />
+	</action-view>
+	
+	<menuitem name="emplap-root-client" title="Client" parent="emplap-root" action="action.emplap.root.clients" />
+	<action-view name="action.emplap.root.clients" title="clients" model="com.hh.emplap.db.Client" >
+		<view type="grid" name="client-grid" />
+		<view type="form" name="client-form" />
 	</action-view>
 </object-views>

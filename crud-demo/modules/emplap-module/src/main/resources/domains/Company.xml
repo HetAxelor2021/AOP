@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
+  http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+
+	<module name="emplap" package="com.hh.emplap.db" />
+	<entity name="Company" >
+		<string name="name" title="Company name" />
+		<datetime name="startDate" tz="true" title="Start Date" />
+		<binary name="logo" title="Company Logo" image="true"/>
+		<many-to-many ref="com.hh.emplap.db.Client" name="clientSet" title="Clients" />
+		<one-to-many ref="com.hh.emplap.db.Employee" name="employeeList" mappedBy="company" title="Employees" />
+		
+		
+	</entity>
+
+  </domain-models>
