@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.4.xsd">
+	<module package="com.hh.emplap.db" name="emplap" />
+	<entity name="Project" >
+		<integer name="statusSelect" selection="emplap.project.status.select" title="Status" />
+		<integer name="priority" />
+		<string name="name" title="Name" />
+		<decimal name="percentage" title="%" />
+		<string name="description" title="Description" large="true" />
+		<one-to-many ref="com.hh.emplap.db.ProjectTask" name="projectList" title="List of Project"  mappedBy="project" />
+		 
+	</entity>
+
+</domain-models>

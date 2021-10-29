@@ -17,7 +17,7 @@
 		<field name="employeeList" />
 		
 	</grid>
-	<form name="company-form" title="Company" model="com.hh.emplap.db.Company" >
+	<form name="company-form" title="Company" model="com.hh.emplap.db.Company" canAttach="true" readonlyIf="id"  width="mid">
 		<panel >
 			<field name="name" />
 			<field name="startDate" />
@@ -25,5 +25,34 @@
 			<panel-related field="clientSet" />
 			<panel-related field="employeeList" />
 		</panel>
+		<panel-tabs>
+			<panel-related field="employeeList" colSpan="12" form-view="employee-popup-form" grid-view="employee-grid"
+				orderBy="sequence" x-selector="checkbox" />
+			<panel-related field="clientSet" colSpan="12" x-selector="checkbox" />
+			<panel title="Employees editor" >
+				<field name="employeeList" showTitle="false" >
+					<editor x-viewer="true" >
+						<field name="name" />
+						<field name="email" />
+					</editor>
+				</field>
+			</panel>	
+			<panel title="Employees editor viewer" >
+				<field name="employeeList" showTitle="false" >
+					<viewer>
+						<![CDATA[
+							<strong>{{record.name}}</strong>
+							<h4>{{record.email}}</h4>
+						
+						]]>
+					</viewer>
+					<editor>
+						<field name="name" />
+						<field name="email" />
+					</editor>
+				</field>
+			</panel>
+		</panel-tabs>
+		
 	</form>
 </object-views>

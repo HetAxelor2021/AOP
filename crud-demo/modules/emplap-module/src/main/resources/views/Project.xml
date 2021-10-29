@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
+   	 
+   	 
+   	<tree name="project-tree" title="Project Tasks">
+   		<column name="title" type="string" />
+   		<column name="progress" type="integer" />
+   		
+   		<node model="com.hh.emplap.db.Project" onClick="">
+   			<field name="name" as="title" />
+   			<field name="percentage" as="progress"/>
+   		</node>
+   		
+   		<node model="com.hh.emplap.db.ProjectTask" parent="project" draggable="true" onClick="" >
+   			<field name="name" as="title" />
+   			<field name="progressTask" as="progress" />
+   		</node> 
+   	 
+   	</tree>
+   	 
+    <kanban  columnBy="statusSelect" model="com.hh.emplap.db.Project" sequenceBy="priority" title="Projects" name="project-kanban"
+    	draggable="true" onMove="action-project-validate-kanban-on-move" onNew="action-project-record-kanban-on-new" limit="2" >
+    	<field name="name" />
+    	<field name="percentage" />
+    	<field name="description" />
+    	<hilite color="danger" if="percentage == 0"/>
+    	<hilite color="info" if="percentage &gt;= 50"/>
+    	<hilite color="success" if="percentage == 100" />
+    	<hilite color="warning" if="percentage &gt; 0" />
+    	<template>
+    		<![CDATA[
+    			<div>
+    				<h4>Name:</h4>
+    				<h5>{{record.name}}</h5>
+    				<br />
+    				<h4>%:</h4>
+    				<h5>{{record.percentage}}</h5>
+    				<br />
+    				<h4>Description:</h4>
+    				<span ng-bind-html="description"/>
+    			</div>
+    		]]>
+    	
+    	</template>
+    	</kanban>
+    	
+    	<grid model="com.hh.emplap.db.Project" title="Projects" name="project-grid">
+    			<field name="name" />
+    			<field name="percentage" />
+    			<field name="description" widget="html" colSpan="12" />
+    			<field name="projectList"  />
+    	
+    	
+    	</grid>
+    	
+    	<form model="com.hh.emplap.db.Project" title="Project" name="project-form" onLoad="action-project-attrs-set-attrs-on-validate" >
+    	
+    		<panel name="mainPanel" title="Main panel" >
+    		
+    			<field name="statusSelect" showTitle="false" widget="NavSelect" colSpan="12" onChange="action-project-group-status-onchange" />
+    			<field name="name" />
+    			<field name="percentage" />
+    			<field name="description" widget="html" colSpan="12" />
+    			<field name="progress" />
+    			<panel-related field="projectList" > </panel-related>
+     		</panel>
+    	</form>
+    
+    	<action-record name="action-project-record-kanban-on-new" model="com.hh.emplap.db.Project" >
+    		<field name="name" expr="eval:_value" />
+    		
+    	</action-record>
+    
+    	<action-validate name="action-project-validate-kanban-on-move" >
+    		<info message="Record moved!" />
+    	</action-validate>
+    	
+    	
+    	<action-group name="action-project-group-status-onchange" >
+    		<action name="save" />
+    		<action name="action-project-attrs-set-attrs-on-validate" />
+    		<action name="save" />
+    	</action-group>
+    
+    	<action-attrs name="action-project-attrs-set-attrs-on-validate" >
+    		<attribute name="readonly" for="name" expr="eval: true" if="statusSelect &gt;= 1" />
+    		<attribute name="title" for="mainPanel" expr="eval: statusSelect &gt;= 1 ? &quot;Validate&quot; : &quot;Main panel&quot;" />
+    		 
+    	</action-attrs>
+    
+</object-views>

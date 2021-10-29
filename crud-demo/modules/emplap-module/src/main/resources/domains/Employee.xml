@@ -17,14 +17,17 @@
 			return name + " : " + email;
 		]]>
 		</string>
-		
+		<binary name="image" image="true" />
 		<enum name="status" ref="WorkingStatus" />
 		<date name="dateOfJoining" title="Date of Joining"  />
 		<time name="timeOfJoining" title="Time of Joining" />
+		<string name="password" password="true" encrypted="true" title="Password" />
 		<one-to-one ref="com.hh.emplap.db.Address" name="address" />
 		<many-to-one ref="com.hh.emplap.db.Company" name="company"  title="Company Name" massUpdate="true"/>
 		
 		<finder-method name="findByEmail" using = "email" />
+		
+		
 		
 		<!-- 
 		

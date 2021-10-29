@@ -7,6 +7,7 @@
 	<menuitem name="emplap-root" title="Employees Details" />
 	<menuitem name="emplap-root-employee" title="Employee" parent="emplap-root" action="action.emplap.root.employees" />
 	<action-view name="action.emplap.root.employees"  title="Employees" model="com.hh.emplap.db.Employee">
+		<view type="cards" name="employee-cards"/>
 		<view type="grid" name="employee-grid" />
 		<view type="form" name="employee-form" />
 	</action-view>
@@ -16,6 +17,10 @@
 		<view type="grid" name="company-grid" />
 		<view type="form" name="company-form" />
 		
+		<view-param name="details-view" value="true" />
+		<!-- 
+		<view-param name="details-view" value="employee-form" />
+		 -->
 	</action-view>
 	
 	<menuitem name="emplap-root-address" title="Address" parent="emplap-root" action="action.emplap.root.addressess" />
@@ -29,4 +34,39 @@
 		<view type="grid" name="client-grid" />
 		<view type="form" name="client-form" />
 	</action-view>
+	
+	<menuitem title="Projects" name="emplap-root-project" parent="emplap-root" action="action.emplap.root.project" />
+	<action-view name="action.emplap.root.project" title="Projects" model="com.hh.emplap.db.Project" >
+		
+		<view type="tree" name="project-tree" />
+		<view type="kanban" name="project-kanban" />
+		<!-- 
+		
+		<view type="grid" name="project-grid" />
+		<view type="form" name="project-form" />
+		 -->
+		
+	
+	</action-view>
+	
+	<menuitem title="Projects2" name="emplap-root-project1" parent="emplap-root" action="action.emplap.root.project1" />
+	<action-view name="action.emplap.root.project1" title="Projects1" model="com.hh.emplap.db.Project" >
+		
+		<view type="grid" name="project-grid" />
+		<view type="form" name="project-form" />
+		<!-- 
+		
+		<view type="tree" name="project-tree" />
+		<view type="kanban" name="project-kanban" />
+		 -->
+		
+	
+	</action-view>
+	
+	
+	
+	
+	
+	
+	
 </object-views>

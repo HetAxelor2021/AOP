@@ -11,7 +11,7 @@
 		
 		
 	</grid>
-	<form name="client-form" title="Client" model="com.hh.emplap.db.Client" >
+	<form name="client-form" title="Client" model="com.hh.emplap.db.Client" canAttach="true" >
 		<panel>
 			<field name="name" />
 			<panel-related field="companySet" />
