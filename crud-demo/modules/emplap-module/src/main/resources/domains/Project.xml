@@ -7,10 +7,11 @@
 		<integer name="statusSelect" selection="emplap.project.status.select" title="Status" />
 		<integer name="priority" />
 		<string name="name" title="Name" />
-		<decimal name="percentage" title="%" />
+		<decimal name="percentage" title="%"  />
 		<string name="description" title="Description" large="true" />
-		<one-to-many ref="com.hh.emplap.db.ProjectTask" name="projectList" title="List of Project"  mappedBy="project" />
-		 
+		<many-to-one ref="com.hh.emplap.db.Company" name="company" title="Comapny Name" />
+		<one-to-many ref="com.hh.emplap.db.ProjectTask" name="projectTaskList" title="List of Project Task"  mappedBy="project" />
+		
 	</entity>
 
 </domain-models>

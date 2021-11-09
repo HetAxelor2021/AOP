@@ -12,7 +12,7 @@
 		
 		<many-to-many ref="com.hh.emplap.db.Client" name="clientSet" title="Clients" />
 		<one-to-many ref="com.hh.emplap.db.Employee" name="employeeList" mappedBy="company" title="Employees" />
-		
+		<one-to-many ref="com.hh.emplap.db.Project" name="projectList" mappedBy="company" title="List of Projects" />
 		
 	</entity>
 

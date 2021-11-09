@@ -18,6 +18,7 @@
 		]]>
 		</string>
 		<binary name="image" image="true" />
+		<integer name="salary" title="Salary"></integer>
 		<enum name="status" ref="WorkingStatus" />
 		<date name="dateOfJoining" title="Date of Joining"  />
 		<time name="timeOfJoining" title="Time of Joining" />

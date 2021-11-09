@@ -15,9 +15,11 @@
 		</field>
 		
 		<field name="employeeList" />
+		<field name="projectList" />
 		
 	</grid>
-	<form name="company-form" title="Company" model="com.hh.emplap.db.Company" canAttach="true" readonlyIf="id"  width="mid">
+	<!-- readonlyIf="id" -->
+	<form name="company-form" title="Company" model="com.hh.emplap.db.Company" canAttach="true"   width="mid">
 		<panel >
 			<field name="name" />
 			<field name="startDate" />
@@ -26,8 +28,10 @@
 			<panel-related field="employeeList" />
 		</panel>
 		<panel-tabs>
-			<panel-related field="employeeList" colSpan="12" form-view="employee-popup-form" grid-view="employee-grid"
-				orderBy="sequence" x-selector="checkbox" />
+			<panel-related field="employeeList" colSpan="12" form-view="employee-popup-form" 
+				orderBy="sequence" x-selector="checkbox" >
+				<field name="name" />
+				</panel-related>
 			<panel-related field="clientSet" colSpan="12" x-selector="checkbox" />
 			<panel title="Employees editor" >
 				<field name="employeeList" showTitle="false" >
@@ -52,6 +56,7 @@
 					</editor>
 				</field>
 			</panel>
+			<panel-related field="projectList" colSpan="12" x-selector="checkbox" canSelect="true" />
 		</panel-tabs>
 		
 	</form>

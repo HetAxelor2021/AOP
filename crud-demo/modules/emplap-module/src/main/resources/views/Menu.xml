@@ -4,42 +4,77 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 	
+	
+	<!-- <menuitem name="emplap-root" title="Employees Details" left="false" top="true"/> -->
 	<menuitem name="emplap-root" title="Employees Details" />
-	<menuitem name="emplap-root-employee" title="Employee" parent="emplap-root" action="action.emplap.root.employees" />
-	<action-view name="action.emplap.root.employees"  title="Employees" model="com.hh.emplap.db.Employee">
-		<view type="cards" name="employee-cards"/>
+	<menuitem icon="fa-user" icon-background="yellow"  name="emplap-root-employee" title="Employee" parent="emplap-root" action="action.emplap.root.employees" order="200"  tag-count="true"/>
+	<action-view name="action.emplap.root.employees"  title="Employees" model="com.hh.emplap.db.Employee" home="true">
+		
+		
+
 		<view type="grid" name="employee-grid" />
+		<view type="cards" name="employee-cards"/>
 		<view type="form" name="employee-form" />
+		<view-param name="search-filters" value="employee-search-filters" />
+		
+<!-- 		<domain>self.salary > :sal</domain> --> 
+		<context name="sal" expr="200000" />
+		<context name="_test" expr="testing" />
+		
 	</action-view>
 	
-	<menuitem name="emplap-root-company" title="Company" parent="emplap-root" action="action.emplap.root.companies" />
-	<action-view name="action.emplap.root.companies" title="Companies" model="com.hh.emplap.db.Company" >
+	<menuitem name="emplap-root-employee1" title="Employee1" parent="emplap-root" action="welcome.dashboard.new" tag-count="true"/>	
+	<action-view name="welcome.dashboard.new" title="Employee1" >
+		<view type="dashboard" name="welcome.dashboard.new" />
+	</action-view>
+		<dashboard name="welcome.dashboard.new" title="welcome!" >
+			<dashlet action="chart:chart.joining.per.month" />
+			
+		</dashboard>
+	<!-- 
+		
+	
+	 -->
+	<menuitem name="emplap-root-company" title="Company" parent="emplap-root" action="action.emplap.root.companies" tag-count="true" icon="fa-user" />
+	<action-view name="action.emplap.root.companies" title="Companies Details" model="com.hh.emplap.db.Company" icon="fa-print">
 		<view type="grid" name="company-grid" />
 		<view type="form" name="company-form" />
 		
 		<view-param name="details-view" value="true" />
+		<view-param name="popup" value="true" />	
+		<view-param name="forceEdit" value="true" />
+		<view-param name="forceTitle" value="true" />
+<!-- 		<view-param name="limit" value="1" /> -->
+<!-- 		<view-param name="popup" value="true" /> -->
+		<view-param name="show-toolbar" value="true" />
+		<view-param name="reload-dotted" value="true" />
+		<view-param name="download" value="true" />
+		
 		<!-- 
 		<view-param name="details-view" value="employee-form" />
 		 -->
 	</action-view>
 	
-	<menuitem name="emplap-root-address" title="Address" parent="emplap-root" action="action.emplap.root.addressess" />
-	<action-view name="action.emplap.root.addressess" title="Addressess" model="com.hh.emplap.db.Address" >
+	<menuitem name="emplap-root-address" title="Address" parent="emplap-root" action="action.emplap.root.addressess"  tag-count="true" icon="fa-address-card-o"/>
+	<action-view name="action.emplap.root.addressess" title="Addressess" model="com.hh.emplap.db.Address" icon="print">
 		<view type="grid" name="address-grid" />
 		<view type="form" name="address-form" />
+		<context name="_showSingle" expr="eval:true" />
+		<context name="_showRecord" expr="eval:1" />
 	</action-view>
 	
-	<menuitem name="emplap-root-client" title="Client" parent="emplap-root" action="action.emplap.root.clients" />
+	<menuitem name="emplap-root-client" title="Client" parent="emplap-root" action="action.emplap.root.clients" tag-count="true" />
 	<action-view name="action.emplap.root.clients" title="clients" model="com.hh.emplap.db.Client" >
 		<view type="grid" name="client-grid" />
 		<view type="form" name="client-form" />
 	</action-view>
 	
-	<menuitem title="Projects" name="emplap-root-project" parent="emplap-root" action="action.emplap.root.project" />
+	<menuitem title="Projects" name="emplap-root-project" parent="emplap-root" action="action.emplap.root.project" tag-count="true" />
 	<action-view name="action.emplap.root.project" title="Projects" model="com.hh.emplap.db.Project" >
 		
 		<view type="tree" name="project-tree" />
 		<view type="kanban" name="project-kanban" />
+		
 		<!-- 
 		
 		<view type="grid" name="project-grid" />
@@ -49,20 +84,28 @@
 	
 	</action-view>
 	
-	<menuitem title="Projects2" name="emplap-root-project1" parent="emplap-root" action="action.emplap.root.project1" />
+	<menuitem title="Projects2" name="emplap-root-project1" parent="emplap-root" action="action.emplap.root.project1" tag-count="true" tag-style="important" tag="hey"/>
 	<action-view name="action.emplap.root.project1" title="Projects1" model="com.hh.emplap.db.Project" >
 		
 		<view type="grid" name="project-grid" />
 		<view type="form" name="project-form" />
+		<view type="kanban" name="project-kanban" />
+		 
 		<!-- 
 		
 		<view type="tree" name="project-tree" />
-		<view type="kanban" name="project-kanban" />
 		 -->
 		
 	
 	</action-view>
 	
+	
+	<menuitem title="ProjectTask" name="emplap-root-project-task" parent="emplap-root" action="action.emplap.root.projectTask" />
+	<action-view name="action.emplap.root.projectTask" title="ProjectsTask" model="com.hh.emplap.db.ProjectTask" >
+		<view type="grid" name="project-task-grid" />
+		<view type="form" name="project-task-form" />
+		
+	</action-view>
 	
 	
 	

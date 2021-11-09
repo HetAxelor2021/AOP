@@ -11,6 +11,7 @@
    		<node model="com.hh.emplap.db.Project" onClick="">
    			<field name="name" as="title" />
    			<field name="percentage" as="progress"/>
+   			
    		</node>
    		
    		<node model="com.hh.emplap.db.ProjectTask" parent="project" draggable="true" onClick="" >
@@ -22,6 +23,7 @@
    	 
     <kanban  columnBy="statusSelect" model="com.hh.emplap.db.Project" sequenceBy="priority" title="Projects" name="project-kanban"
     	draggable="true" onMove="action-project-validate-kanban-on-move" onNew="action-project-record-kanban-on-new" limit="2" >
+    	
     	<field name="name" />
     	<field name="percentage" />
     	<field name="description" />
@@ -50,12 +52,12 @@
     			<field name="name" />
     			<field name="percentage" />
     			<field name="description" widget="html" colSpan="12" />
-    			<field name="projectList"  />
-    	
+    			<field name="projectTaskList"  />
+    			<field name="company" />
     	
     	</grid>
     	
-    	<form model="com.hh.emplap.db.Project" title="Project" name="project-form" onLoad="action-project-attrs-set-attrs-on-validate" >
+    	<form model="com.hh.emplap.db.Project" title="Project" name="project-form" onLoad="action-project-attrs-set-attrs-on-validate" onNew="action-project-company-onnew" >
     	
     		<panel name="mainPanel" title="Main panel" >
     		
@@ -64,14 +66,21 @@
     			<field name="percentage" />
     			<field name="description" widget="html" colSpan="12" />
     			<field name="progress" />
-    			<panel-related field="projectList" > </panel-related>
+    			<field name="company" />
+    			<panel-related field="projectTaskList" canSelect="true" />
      		</panel>
     	</form>
+     
+     	<action-record name="action-project-company-onnew" model="com.hh.emplap.db.Project" >
+     		<field name="company" expr="eval:__parent__" />
+     	</action-record>
     
+    	
     	<action-record name="action-project-record-kanban-on-new" model="com.hh.emplap.db.Project" >
     		<field name="name" expr="eval:_value" />
     		
     	</action-record>
+    	
     
     	<action-validate name="action-project-validate-kanban-on-move" >
     		<info message="Record moved!" />
@@ -87,7 +96,14 @@
     	<action-attrs name="action-project-attrs-set-attrs-on-validate" >
     		<attribute name="readonly" for="name" expr="eval: true" if="statusSelect &gt;= 1" />
     		<attribute name="title" for="mainPanel" expr="eval: statusSelect &gt;= 1 ? &quot;Validate&quot; : &quot;Main panel&quot;" />
-    		 
+    		<attribute name="hidden" for="name" expr="eval: true" if="statusSelect == 4" />
+    		<attribute name="title" for="name" expr="Project_name" />
+    		<attribute name="precision" for="percentage" expr="eval:4"  />
+    		<attribute name="refresh" for="name" expr="true"/>
+    		
+    		
+    		<!-- <attribute name="required" for="name" expr="eval:true" if="statusSelect == 3"/> -->
     	</action-attrs>
+    
     
 </object-views>

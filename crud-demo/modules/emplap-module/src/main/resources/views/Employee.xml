@@ -3,7 +3,39 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
-	<grid name="employee-grid" title="Employees" model="com.hh.emplap.db.Employee" >
+  
+  
+  <chart name="chart.joining.per.month" title="Joining Per Month" >
+  	<search-fields>
+  		
+  		<field type="datetime" name="fromDateTime" title="From Date" />
+  		<field type="datetime" name="toDateTime" title="To Date" />
+  	
+  	</search-fields> 
+  	<dataset type="sql">
+  	<![CDATA[
+  		select sum(ae.id) s , ec.name f, ae.salary salary
+  		from axelor_employee ae left join emplap_company ec
+  		on ae.company = ec.id
+  		where ae.date_of_joining > DATE(:fromDateTime) 
+  			and ae.date_of_joining < DATE(:toDateTime)
+  		group by ec.name, ae.salary
+  	
+  	
+  	]]>
+  		<!-- group by MONTH(date_of_joining) -->
+  	</dataset>
+  	<category key="fn" type="text" />
+  	<series key="s" groupBy="ae.salary" type="bar"/>
+  	
+  	<config name="colors" value="red,green" />
+  	
+  	  
+  	
+  	
+  </chart>
+  
+	<grid name="employee-grid" title="Employees-grid" model="com.hh.emplap.db.Employee" >
 		<field name="id" />
 		<field name="name" />
 		<field name="email" />
@@ -11,18 +43,19 @@
 		<field name="status" />
 		<field name="dateOfJoining" />
 		<field name="timeOfJoining" />
+		<field name="salary" />
 		<field name="address" />
 		<field name="company" />
 		
 	</grid>
 	
 	
-	<form model="com.hh.emplap.db.Employee" name="employee-form" title="Employee" canNew ="true" canSave="true"  canEdit="true" canCopy="true"  onNew="action-employee-group-on-new" >
+	<form model="com.hh.emplap.db.Employee" name="employee-form" title="Employee-form" canNew ="true" canSave="true"  canEdit="true" canCopy="true"  onNew="action-employee-group-on-new"  onLoad="action-employee-date-onload">
 		<panel-include view="employee-popup-form" />
 		
 		
 		<panel name="mainPanel" title="Main Panel" >
-			<panel title="Employee Details" stacked="true" colSpan="8" itemSpan="3" hidden="false" readonly="false" readonlyIf="name == 'Hetul'" showFrame="true" showTitle="true" help="make sure all the details are perfect" collapseIf="true" canCollapse="true" if-module="emplap-module" >
+			<panel title="Employee Details" stacked="true" colSpan="8" itemSpan="3" hidden="false" readonly="false" readonlyIf="name == 'Hetul'" showFrame="true"  help="make sure all the details are perfect" collapseIf="true" canCollapse="true" if-module="emplap-module" >
 			
 			
 			<!-- showIf="" -->		
@@ -74,8 +107,9 @@
 				<panel name="joiningDetail" title="Joining details">
 					<field name="dateOfJoining" />
 					<field name="timeOfJoining" />
-					
-				</panel>
+					<field name="salary" />
+					<field name="testText" type="string" />
+ 				</panel>
 				<panel name="addressPanel" title="Address Panel">
 					<field name="address" canEdit="true" canNew="true"/>				
 				</panel>
@@ -85,7 +119,7 @@
 			</panel>
 		</panel-tabs>
 		<panel name="buttonsPanel" sidebar="true" >
-			<button title="Validate" name="validateBtn" onClick=""/>
+			<button title="Validate" name="validateBtn" onClick="action-employee-validate-validate-onclick, action-employee-record-validate "/>
  		</panel>	
  		
 	</form>
@@ -93,8 +127,9 @@
 	
 	
 	
-	<form model="com.hh.emplap.db.Employee" title="Employee" name="employee-popup-form" >
+	<form model="com.hh.emplap.db.Employee" title="Employee-form2" name="employee-popup-form" >
 		<panel name="innerPanel1" title="Inner Panel 1" >
+		<field name="$isValid" type="boolean" widget="checkbox" readonly="true" colspan="12"  />
 			<field name="$test" type="boolean"  widget="checkbox"/>
 			<field name="name" />
 			<field name="email" />
@@ -106,7 +141,9 @@
 	
 	
 	
-	<cards name="employee-cards" model="com.hh.emplap.db.Employee"  title="Employee" width="300px" >
+	
+	
+	<cards name="employee-cards" model="com.hh.emplap.db.Employee"  title="Employee-cards" width="300px" >
 		<field name="dateOfJoining" />
 		<field name="timeOfJoining" />
 		<field name="address" />
@@ -122,17 +159,45 @@
 				<br/>
 				<strong>{{timeOfJoining}}</strong>
 				<br/>
-				<strong>{{address}}</strong>
+				<strong>{{address.name}}</strong>
 				</div>
 			
 			]]>
 		</template>
 	</cards>
 	
+	<action-record name="action-employee-date-onload" model="com.hh.emplap.db.Employee" >
+		<field name="dateOfJoining" expr="eval: __datetime__" if="!dateOfJoining" />
+	</action-record>
+	
+	<search-filters name="employee-search-filters" model="com.hh.emplap.db.Employee" title="Employees" >
+		<field name="dateOfJoining" hidden="true" />
+		<filter title="Date of joining is not null" >
+			<domain>self.dateOfJoining != null</domain>
+		</filter>
+	</search-filters>
+	
+	<action-record name="action-employee-record-set-defaults-onnew"  model="com.hh.emplap.db.Employee">
+		<field name="testText" expr="eval:_test" />
+		<field name="company" expr="action: action-employee-set-default-company-name" />
+	 </action-record>	
+	 <action-record name="action-employee-set-default-company-name" model="com.hh.emplap.db.Company" search="self.startDate IS NOT NULL" >
+	 	<field name="name" expr="Default" />
+	 </action-record>
+	
+	
+	
+	<action-record name="action-employee-record-validate" model="com.hh.emplap.db.Employee" >
+		<field name="$isValid" expr="eval:true" />
+	</action-record>
+	
 	
 	<action-group name="action-employee-group-on-new" >
+		<action name="action-employee-record-set-defaults-onnew" />
 		<action name="action-employee-record-set-default-onnew" />
-	
+		<!-- <action name="action-employee-record-call-service-method" />
+		 -->
+		
 	</action-group>
 	
 	<action-record name="action-employee-record-set-default-onnew" model="com.hh.emplap.db.Employee" >
@@ -140,13 +205,14 @@
 	</action-record>
 	
 	
+	<!-- 
 	<action-record name="action-people-record-fill-validate" model="com.hh.emplap.db.Employee" >
 		<field name="$isValidated" expr="eval:true" />
-	</action-record>
+	</action-record> -->
 	
-	
+	 
 	<action-validate name="action-employee-validate-validate-onclick" >
-		<info message="Password is default only" if="password == '12345'" />
+		<info message="Password is default only" if="salary== 400000" action="action-employee-record-validate" />
 	</action-validate>
 	
 	<action-validate name="action-employee-validate-employee">
@@ -156,6 +222,7 @@
 	<action-record name="action-employee-record-onnew" model="com.hh.emplap.db.Employee" >
 		<field name="email" expr="x@axelor.com" />
 	</action-record>
+	
 </object-views>
 <!-- 
 
