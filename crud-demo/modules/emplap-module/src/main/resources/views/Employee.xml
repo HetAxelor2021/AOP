@@ -14,15 +14,16 @@
   	</search-fields> 
   	<dataset type="sql">
   	<![CDATA[
-  		select sum(ae.id) s , ec.name f, ae.salary salary
+			select first_name fn, salary s
+			from axelor_employee  	
+  	]]>
+<!--   		select sum(ae.id) s , ec.name f, ae.salary salary
   		from axelor_employee ae left join emplap_company ec
   		on ae.company = ec.id
   		where ae.date_of_joining > DATE(:fromDateTime) 
   			and ae.date_of_joining < DATE(:toDateTime)
   		group by ec.name, ae.salary
-  	
-  	
-  	]]>
+  	 -->
   		<!-- group by MONTH(date_of_joining) -->
   	</dataset>
   	<category key="fn" type="text" />
@@ -46,6 +47,7 @@
 		<field name="salary" />
 		<field name="address" />
 		<field name="company" />
+		<field name="portFolioUrl" />
 		
 	</grid>
 	
@@ -105,9 +107,9 @@
 		<panel-tabs>
 			<panel name="personalDetailsPanel" title="Personal details" >
 				<panel name="joiningDetail" title="Joining details">
-					<field name="dateOfJoining" />
-					<field name="timeOfJoining" />
-					<field name="salary" />
+					<field name="dateOfJoining" widget="date" />
+					<field name="timeOfJoining" widget="time"/>
+					<field name="salary" widget="number" x-scale="9" x-precision="3"/>
 					<field name="testText" type="string" />
  				</panel>
 				<panel name="addressPanel" title="Address Panel">
@@ -121,6 +123,7 @@
 		<panel name="buttonsPanel" sidebar="true" >
 			<button title="Validate" name="validateBtn" onClick="action-employee-validate-validate-onclick, action-employee-record-validate "/>
  		</panel>	
+ 	
  		
 	</form>
 	
@@ -132,9 +135,10 @@
 		<field name="$isValid" type="boolean" widget="checkbox" readonly="true" colspan="12"  />
 			<field name="$test" type="boolean"  widget="checkbox"/>
 			<field name="name" />
-			<field name="email" />
-			<field name="image" />
-			
+			<field name="email" widget="email" />
+			<field name="image" widget="image"/>
+			<field name="portFolioUrl" widget="url" />
+			<field name="$genderSelect" type="integer" selection="emplap.employee.gender.select" widget="RadioSelect"/> 
 		</panel>
 		
 	</form>

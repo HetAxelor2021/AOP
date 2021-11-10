@@ -5,16 +5,57 @@
   http://axelor.com/xml/ns/object-views/object-views_5.4.xsd">
 	<grid  model="com.hh.emplap.db.Client" name="client-grid" title="clients" >
 		<field name="name" />
-		<field name="compnaySet" >
-			
-		</field>
+		<field name="phoneNumber" />
+		<field name="compnaySet" />
+		<field name="budget" widget="Decimal" x-scale="3" x-precision="6" />
+		
 		
 		
 	</grid>
-	<form name="client-form" title="Client" model="com.hh.emplap.db.Client" canAttach="true" >
+	<form name="client-form" title="Client" model="com.hh.emplap.db.Client"  onNew="action-client-record-call-service-method" canAttach="true" >
 		<panel>
+		
 			<field name="name" />
+			<field name="phoneNumber" widget="phone" 	 />
+			<field name="budget" widget="Decimal" x-scale="3" x-precision="6" />
+			<field name="transientTest" type="string" onChange="save, action-client-method-check-possibility"/>
+			<field name="$test" type="string" /> 
+			<field name="$address" />
+			
+			<field name="$addressSome" x-type="many-to-one" x-target="com.hh.emplap.db.Address" x-target-name="name" />
+			<field name="$addressOne" x-type="one-to-one" x-target="com.hh.emplap.db.Address" x-target-name="name" /> 
+			<!-- <panel-related field="$projectList" x-type="one-to-many" x-target="com.hh.emplap.db.Project" > -->
+				<field name="$projectList" x-type="one-to-many" x-target="com.hh.emplap.db.Project" colSpan="12" canSelect="true" >
+					<viewer>
+						<![CDATA[
+							<project>
+							
+							 {{record.name}} -- {{record.percentage}} 
+							</project>
+						]]>
+						
+					</viewer>
+					<editor x-show-titles="false">
+						<field name="name" colSpan="12" />
+						<field name="percentage" colSpan="12" />
+					
+					</editor>
+				
+				</field>
+			<!-- </panel-related> -->
+			
 			<panel-related field="companySet" />
 		</panel>
 	</form>
+	
+	<action-method name="action-client-method-check-possibility" >
+		<call class="com.hh.emplap.web.ClientController" method="checkPosibility" />
+	</action-method>
+	
+	<action-record name="action-client-record-call-service-method" model="com.hh.emplap.db.Client" >
+		<field name="$test" expr="call:com.hh.emplap.service.ClientService:test()" />
+	</action-record>
+	
+	
+	
 </object-views>

@@ -10,5 +10,10 @@
 		<option value="3">Finished</option>
 		<option value="4">Cancelled</option>
 	</selection>
+	<selection name="emplap.employee.gender.select" >
+		<option value="0" >Male</option>
+		<option value="1">Female</option>
+		<option value="2">Other</option>
+	</selection>
     
 </object-views>

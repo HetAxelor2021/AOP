@@ -24,7 +24,7 @@
 			<field name="name" />
 			<field name="startDate" />
 			<field name="logo" />
-			<panel-related field="clientSet" />
+			<panel-related field="clientSet" widget="TagSelect" />
 			<panel-related field="employeeList" />
 		</panel>
 		<panel-tabs>
@@ -57,6 +57,7 @@
 				</field>
 			</panel>
 			<panel-related field="projectList" colSpan="12" x-selector="checkbox" canSelect="true" />
+				<panel-dashlet title="Employee-Salary" action="chart:chart.joining.per.month" />
 		</panel-tabs>
 		
 	</form>

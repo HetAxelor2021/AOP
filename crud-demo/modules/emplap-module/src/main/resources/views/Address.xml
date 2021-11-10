@@ -13,7 +13,8 @@
 		<panel>
 			<field name="name" />
 			<field name="employee" />
-		
+			<field name="script" widget="code-editor" x-code-syntax="xml" />
+			<field name="note" widget="html" />
 		</panel>
 	</form>
   

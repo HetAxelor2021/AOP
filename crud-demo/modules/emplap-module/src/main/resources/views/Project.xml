@@ -57,19 +57,45 @@
     	
     	</grid>
     	
-    	<form model="com.hh.emplap.db.Project" title="Project" name="project-form" onLoad="action-project-attrs-set-attrs-on-validate" onNew="action-project-company-onnew" >
+    	<form model="com.hh.emplap.db.Project" title="Project" name="project-form" onLoad="action-project-group-onload" onNew="action-project-company-onnew"  >
     	
     		<panel name="mainPanel" title="Main panel" >
     		
-    			<field name="statusSelect" showTitle="false" widget="NavSelect" colSpan="12" onChange="action-project-group-status-onchange" />
+    			<field name="statusSelect" showTitle="false" widget="NavSelect" colSpan="12" onChange="action-project-group-status-onchange, check-status-project" />
     			<field name="name" />
-    			<field name="percentage" />
+    			<field name="percentage" onChange="action-project-validate-percentage-onchange" />
     			<field name="description" widget="html" colSpan="12" />
     			<field name="progress" />
-    			<field name="company" />
+    			<field name="company"  />
     			<panel-related field="projectTaskList" canSelect="true" />
      		</panel>
     	</form>
+    	
+    	<action-group name="action-project-group-onload" >
+    		<action name="action-project-attrs-set-attrs-on-validate" />
+    		<action name="action-project-validate-company-onload" />
+    	</action-group>
+    	
+    	<action-condition name="check-status-project" >
+    		<check field="statusSelect" />
+    		<check field="projectTaskList" />
+    		<check field="statusSelect" if="statusSelect &gt;=  1 &amp;&amp; !projectTaskList" error="must select a draft status" /> 
+    	</action-condition>
+    	
+    	
+    	<action-validate name="action-project-validate-company-onload" >
+    		<alert message="company field compulsory to fill" if="!company" />
+    	</action-validate>
+    	
+    	<action-validate name="action-project-validate-percentage-onchange" >
+    		<error message="less than 35"  if="percentage &lt; 35" action="action-project-validate-msg"/>
+    	</action-validate>
+     	
+     	<action-validate name="action-project-validate-msg" >
+     		<info message="action trigger by another action" />
+     		<notify message="notify message" />
+     	</action-validate>
+     	
      
      	<action-record name="action-project-company-onnew" model="com.hh.emplap.db.Project" >
      		<field name="company" expr="eval:__parent__" />

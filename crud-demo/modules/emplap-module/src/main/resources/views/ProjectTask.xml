@@ -12,14 +12,30 @@
   	<form model="com.hh.emplap.db.ProjectTask" title="Project Task" name="project-task-form" onNew="action-project-task-record-onnew, action-validate-hello"  >
   		<panel name="mainPanel" title="Main Panel" >
   			<field name="name" />
-  			<field name="progressTask" />
+  			<static>
+  			<![CDATA[
+  			Progress about task
+  			]]>
+  			</static>
+  			<field name="progressTask"   />
+  			<help css="alert-info" >
+  			<![CDATA[
+  			info about project
+  			]]>
+  			</help>
   			<field name="project" />
+  			<field name="$test" type="boolean" widget="toggle" colSpan="2" />
+  			<field name="$test1" type="boolean" widget="boolean-select" x-true-text="Yes" x-false-text="No" />
+  			<field name="$test2" type="boolean" widget="boolean-radio" x-true-text="On" x-false-text="Off" />
+  			<field name="$test3" type="boolean" widget="boolean-switch" />
+  			
   		</panel>
   	</form>
   	
   		<action-record name="action-project-task-record-onnew" model="com.hh.emplap.db.ProjectTask" >
  			
  			<field name="project" expr="eval: _parent" />
+ 			
  		</action-record> 
  			
  	 

@@ -9,16 +9,18 @@
 		<item name="NOT_AVAILABLE" value="false"/>
 	</enum>
 	<entity name="Employee"   >
+	
 		<string name="name" title="Name"  required="true" help="firstname" column="first_name" />
 		<string name="email" title="Email" required="true" default="example@example.com" unique="true" />
 		<integer name="age" transient="true" />
+		<string name="portFolioUrl" title="Portfolio Url"  />
 		<string name="nameWithEmail" title="Name with Email" search="name,email" readonly="true" >
 		<![CDATA[
 			return name + " : " + email;
 		]]>
 		</string>
-		<binary name="image" image="true" />
-		<integer name="salary" title="Salary"></integer>
+		<many-to-one ref="com.axelor.meta.db.MetaFile" name="image" title="Image" />
+		<integer name="salary" title="Salary" ></integer>
 		<enum name="status" ref="WorkingStatus" />
 		<date name="dateOfJoining" title="Date of Joining"  />
 		<time name="timeOfJoining" title="Time of Joining" />
@@ -29,7 +31,7 @@
 		<finder-method name="findByEmail" using = "email" />
 		
 		
-		
+			
 		<!-- 
 		
 		 -->
