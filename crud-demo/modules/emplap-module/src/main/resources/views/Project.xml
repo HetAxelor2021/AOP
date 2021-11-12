@@ -62,7 +62,7 @@
     		<panel name="mainPanel" title="Main panel" >
     		
     			<field name="statusSelect" showTitle="false" widget="NavSelect" colSpan="12" onChange="action-project-group-status-onchange, check-status-project" />
-    			<field name="name" />
+    			<field name="name" translatable="true" />
     			<field name="percentage" onChange="action-project-validate-percentage-onchange" />
     			<field name="description" widget="html" colSpan="12" />
     			<field name="progress" />

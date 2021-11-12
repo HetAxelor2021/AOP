@@ -53,6 +53,9 @@
 	
 	
 	<form model="com.hh.emplap.db.Employee" name="employee-form" title="Employee-form" canNew ="true" canSave="true"  canEdit="true" canCopy="true"  onNew="action-employee-group-on-new"  onLoad="action-employee-date-onload">
+		<toolbar >
+			<button name="btnPrint" icon="fa-print" onClick="print-employee-details" />
+		</toolbar>
 		<panel-include view="employee-popup-form" />
 		
 		
@@ -170,11 +173,14 @@
 		</template>
 	</cards>
 	
-	<action-report name="action-report-invoice" 
-		design="invoice.rptdesign"
-		output="invoice-"
+	<action-report name="print-employee-details"  
+		design="employee.rptdesign"
+		output="so-${date}${time}"
+		format="pdf"
 	>
+		<param name="empId" expr="eval: id" />
 	</action-report>
+	
 	
 	<action-record name="action-employee-date-onload" model="com.hh.emplap.db.Employee" >
 		<field name="dateOfJoining" expr="eval: __datetime__" if="!dateOfJoining" />

@@ -1,5 +1,8 @@
 package com.hh.emplap.web;
 
+import javax.validation.ValidationException;
+
+import com.axelor.i18n.I18n;
 import com.axelor.inject.Beans;
 import com.axelor.meta.schema.actions.ActionView;
 import com.axelor.meta.schema.actions.ActionView.ActionViewBuilder;
@@ -10,6 +13,7 @@ import com.hh.emplap.db.Client;
 import com.hh.emplap.db.Company;
 import com.hh.emplap.db.repo.ClientRepository;
 import com.hh.emplap.service.ClientService;
+import com.hh.emplap.translation.ITranslation;
 
 public class ClientController {
 		public void checkPosibility(ActionRequest request, ActionResponse response) {
@@ -56,8 +60,6 @@ public class ClientController {
 			response.setValues(client);
 			
 			
-			
-			
 			//3. used to update attributes.
 			response.setAttr("$test",  "title", "Testing");
 			
@@ -66,6 +68,10 @@ public class ClientController {
 			//4. used to open view
 //			ActionViewBuilder actionViewBuilder = ActionView.define("Company").model(Company.class.getName()).add("grid","company-grid").add("form","company-form");
 //			response.setView(actionViewBuilder.map());
+			if(true) {
+				
+				throw new ValidationException(I18n.get(ITranslation.DRAFT_STATUS_ERROR)	);
+			}
 			
 		}
 

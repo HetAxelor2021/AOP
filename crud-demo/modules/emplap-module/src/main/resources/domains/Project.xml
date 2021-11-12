@@ -6,7 +6,7 @@
 	<entity name="Project" >
 		<integer name="statusSelect" selection="emplap.project.status.select" title="Status" />
 		<integer name="priority" />
-		<string name="name" title="Name" />
+		<string name="name" translatable="true" title="Name" />
 		<decimal name="percentage" title="%"  />
 		<string name="description" title="Description" large="true" />
 		<string name="projectLanguages" title="Languages" selection="emplap.project.language.select" /> 
