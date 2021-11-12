@@ -34,13 +34,38 @@ public class ClientController {
 			//2. used for validations
 			response.setFlash("Hello Error");
 			
+			/* response.setReload(true); */
+			System.out.println("refresh");
+			
+//			System.out.println("close false");
+			
+			response.setNotify("hello this is notify method");
+			
+			
+			response.setValue("name","HHClient1");
+			System.out.println("setValue");
+			
+			
+			response.setReadonly("name",true );
+			response.setHidden("budget",true);
+//			response.getData();
+			System.out.println("read and hide");
+			
+			client.setName("ccClient1");
+			
+			response.setValues(client);
+			
+			
+			
+			
 			//3. used to update attributes.
 			response.setAttr("$test",  "title", "Testing");
 			
+//			response.setCanClose(true);
 			System.err.println(Company.class.getName());
 			//4. used to open view
-			ActionViewBuilder actionViewBuilder = ActionView.define("Company").model(Company.class.getName()).add("grid","company-grid").add("form","company-form");
-			response.setView(actionViewBuilder.map());
+//			ActionViewBuilder actionViewBuilder = ActionView.define("Company").model(Company.class.getName()).add("grid","company-grid").add("form","company-form");
+//			response.setView(actionViewBuilder.map());
 			
 		}
 

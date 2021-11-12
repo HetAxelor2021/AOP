@@ -170,6 +170,12 @@
 		</template>
 	</cards>
 	
+	<action-report name="action-report-invoice" 
+		design="invoice.rptdesign"
+		output="invoice-"
+	>
+	</action-report>
+	
 	<action-record name="action-employee-date-onload" model="com.hh.emplap.db.Employee" >
 		<field name="dateOfJoining" expr="eval: __datetime__" if="!dateOfJoining" />
 	</action-record>

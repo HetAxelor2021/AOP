@@ -9,6 +9,7 @@
 		<string name="name" title="Name" />
 		<decimal name="percentage" title="%"  />
 		<string name="description" title="Description" large="true" />
+		<string name="projectLanguages" title="Languages" selection="emplap.project.language.select" /> 
 		<many-to-one ref="com.hh.emplap.db.Company" name="company" title="Comapny Name" />
 		<one-to-many ref="com.hh.emplap.db.ProjectTask" name="projectTaskList" title="List of Project Task"  mappedBy="project" />
 		

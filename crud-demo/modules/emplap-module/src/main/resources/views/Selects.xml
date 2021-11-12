@@ -15,5 +15,11 @@
 		<option value="1">Female</option>
 		<option value="2">Other</option>
 	</selection>
+	<selection name="emplap.project.language.select" >
+		<option value="javaScript" >JavaScript</option>
+		<option value="java" >Java</option>
+		<option value="python" >Python</option>
+		<option value="php" >Php</option>
+	</selection>
     
 </object-views>
