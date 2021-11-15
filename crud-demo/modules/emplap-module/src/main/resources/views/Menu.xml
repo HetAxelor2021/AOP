@@ -16,6 +16,9 @@
 		<view type="cards" name="employee-cards"/>
 		<view type="form" name="employee-form" />
 		<view-param name="search-filters" value="employee-search-filters" />
+		<context name="json-enhance" expr="true" />
+		<!-- <view-param name="download" value="true" /> -->
+			
 		
 <!-- 		<domain>self.salary > :sal</domain> --> 
 		<context name="sal" expr="200000" />
@@ -39,17 +42,17 @@
 	<action-view name="action.emplap.root.companies" title="Companies Details" model="com.hh.emplap.db.Company" icon="fa-print">
 		<view type="grid" name="company-grid" />
 		<view type="form" name="company-form" />
+		<view-param name="reload-dotted" value="false" />
 		
-		<view-param name="details-view" value="true" />
+		<view-param name="download" value="true" />
+		<!-- <view-param name="details-view" value="true" /> -->
 		<view-param name="popup" value="true" />	
-		<view-param name="forceEdit" value="true" />
-		<view-param name="forceTitle" value="true" />
+		<!-- <view-param name="forceEdit" value="true" />
+		<view-param name="forceTitle" value="true" /> -->
 <!-- 		<view-param name="limit" value="1" /> -->
 <!-- 		<view-param name="popup" value="true" /> -->
-		<view-param name="show-toolbar" value="true" />
-		<view-param name="reload-dotted" value="true" />
-		<view-param name="download" value="true" />
-		
+		<!-- <view-param name="show-toolbar" value="true" />
+		 -->
 		<!-- 
 		<view-param name="details-view" value="employee-form" />
 		 -->
@@ -60,7 +63,7 @@
 		<view type="grid" name="address-grid" />
 		<view type="form" name="address-form" />
 		<context name="_showSingle" expr="eval:true" />
-		<context name="_showRecord" expr="eval:1" />
+		<context name="_showRecord" expr="eval:1" /> 
 	</action-view>
 	
 	<menuitem name="emplap-root-client" title="Client" parent="emplap-root" action="action.emplap.root.clients" tag-count="true" />

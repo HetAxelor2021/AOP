@@ -36,7 +36,10 @@
   	
   </chart>
   
-	<grid name="employee-grid" title="Employees-grid" model="com.hh.emplap.db.Employee" >
+	<grid  name="employee-grid" title="Employees-grid" x-selector="checkbox" model="com.hh.emplap.db.Employee" >
+		<toolbar>
+			<button name="btnPrintGrid" icon="fa-print" onClick="print-employees-details" />
+		</toolbar>
 		<field name="id" />
 		<field name="name" />
 		<field name="email" />
@@ -172,6 +175,15 @@
 			]]>
 		</template>
 	</cards>
+	
+	<action-report name="print-employees-details"
+		design="employees.rptdesign"
+		output="so-${date}${time}"
+		format="pdf"
+		>
+		<!-- <param name="empId" expr="eval:id" /> -->
+ 		<param name="empIds" expr="eval:__ids__.join(',')" />
+		</action-report>
 	
 	<action-report name="print-employee-details"  
 		design="employee.rptdesign"
